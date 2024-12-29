@@ -1,0 +1,78 @@
+replica set 
+
+- Create 3 files
+1) rs1.yml : name: myrc and lable env=dev
+
+                  apiVersion: apps/v1
+                kind: ReplicaSet
+                metadata:
+                   name: myrc
+                spec:
+                  replicas: 3
+                  selector:
+                   matchLabels:
+                      env: dev
+                  template:
+                       metadata:
+                          labels:
+                              env: dev
+                       spec:
+                            containers:
+                                 - name: nginxcontainer
+                                   image: nginx
+                                   ports:
+                                     - containerPort: 80
+
+2) rs2.yml : name: myrc1 and lable env=prod
+
+                apiVersion: apps/v1
+                kind: ReplicaSet
+                metadata:
+                  name: myrc1
+                spec:
+                  replicas: 3
+                  selector:
+                    matchLabels:
+                      env: prod
+                  template:
+                    metadata:
+                      labels:
+                        env: prod
+                    spec:
+                      containers:
+                        - name: nginxcontainer
+                          image: nginx
+                          ports:
+                            - containerPort: 80
+3) rs3.yml : name: myrc2 and lable env=testing
+
+                      apiVersion: apps/v1
+                      kind: ReplicaSet
+                      metadata:
+                        name: myrc2
+                      spec:
+                        replicas: 3
+                        selector:
+                          matchLabels:
+                            env: testing
+                        template:
+                          metadata:
+                            labels:
+                              env: testing
+                          spec:
+                            containers:
+                              - name: nginxcontainer
+                                image: nginx
+                                ports:
+                                  - containerPort: 80
+
+- Create pods using above files 
+kubectl apply -f rs1.yml
+kubectl apply -f rs2.yml
+kubectl apply -f rs3.yml
+
+- To view list of pods 
+kubectl get pods
+
+- To view two pods with different lables 
+kubectl get pods --selector 'env in (dev,testing)'
