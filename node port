@@ -1,0 +1,23 @@
+NODE PORT
+
+- Create a myservice.yml file.
+nano myservice.yml:
+
+    ----apiVersion: v1
+        kind: Service
+        metadata:
+          name: mynodeportservice
+        spec:
+          type: NodePort
+          selector:
+              app: myapp
+          ports:
+           - protocol: TCP
+             port: 80
+             targetPort: 80
+             nodePort: 30001
+- To create service using yml file
+kubectl apply -f myservice.yml
+
+-  list of services 
+kubectl get services
