@@ -1,0 +1,79 @@
+DEPLOYMENT
+
+- Create a file mydeployment.yml
+ 
+          apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+             name: mydeployment
+          spec:
+            replicas: 3
+            selector:
+              matchLabels:
+                env: dev
+            template:
+                 metadata:
+                    labels:
+                        env: dev
+                 spec:
+                      containers:
+                           - name: nginxcontaine
+                             image: nginx
+                             ports:
+                               - containerPort: 80
+
+- To create pod using that file:
+kubectl apply -f mydeployment.yml
+
+- To view list of pods:
+kubectl get pods
+
+- To view list of deployments:
+kubectl get deployment
+
+- Update Image in container:
+kubectl set image deployment mydeployment  nginxcontaine=httpd 
+
+-To use RollingUpdate with Deployment Kind in Kubernetes
+            apiVersion: apps/v1
+          kind: Deployment
+          metadata:
+             name: mydeployment
+          spec:
+            replicas: 3
+            strategy:
+              type: RollingUpdate
+              rollingUpdate:
+                   maxSurge: 2
+                   maxUnavailable: 0
+            selector:
+              matchLabels:
+                env: dev
+            template:
+                 metadata:
+                    labels:
+                        env: dev
+                 spec:
+                      containers:
+                           - name: nginxcontaine
+                             image: nginx
+                             ports:
+                               - containerPort: 80
+
+- To view rollout status:
+kubectl rollout status deployment deployment
+
+- To view yaml file created by kubernetes:
+kubectl get deployment mydeployment -o yaml
+
+- To undo rollout status:
+kubectl rollout undo deployment deployment
+
+- To view rollout history:
+kubectl rollout history deployment mydeployment 
+
+- To go to specific revision:
+kubectl rollout undo deploy mydeployment --to-revision=3
+
+- To add name to change-cause:
+kubectl annotate deployments.apps mydeployment kubernetes.io/change-cause="nayahai" 
