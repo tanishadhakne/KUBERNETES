@@ -69,7 +69,7 @@ Feel free to fork this repository, make changes, and submit a pull request.
 This project is licensed under the MIT License.
 
 ## 📬 Contact
-- **Email:** dhaknetanisha@gmail.com
+- **Email:** tanisha.github@gmail.com
 - **LinkedIn:** https://in.linkedin.com/in/tanisha-dhakne-245bb8229?trk=public_profile_browsemap
 
 ---
