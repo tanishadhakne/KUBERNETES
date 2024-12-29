@@ -1,0 +1,27 @@
+LOAD BALANCER
+
+-Create a lbservice.yml file.
+-lbservice.yml:
+
+      --apiVersion: v1
+        kind: Service
+        metadata:
+          name: loadwalaservice
+        spec:
+          type: LoadBalancer
+          selector:
+              app: myapp
+          ports:
+           - protocol: TCP
+             port: 80
+             targetPort: 80
+-save 
+
+-create service using yml file
+ kubectl apply -f loadwalaservice.yml
+
+- list of Services
+kubectl get services
+
+
+
