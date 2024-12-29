@@ -1,0 +1,28 @@
+customnamespace
+
+-Create namespace using .yml file
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: aplanamespace
+
+- Create namepsace : 
+kubectl create namespace mynamespace  
+
+- Describe namespace:
+kubectl describe namespace mynamespace   
+
+- To create pod inside namepsace:
+kubectl apply -f mynginx.yml  -n mynamespace
+
+- To view list of pods:
+kubectl get pods
+
+- To view pods in mynamespace:
+kubectl get pods -n mynamespace
+
+- To set default namespace to "mynamespace" :
+kubectl config set-context --current --namespace mynamespace
+- To delete namespace:
+
+kubectl delete namespace mynamespace      
