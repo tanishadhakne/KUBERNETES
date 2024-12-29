@@ -1,0 +1,16 @@
+POD
+
+nginxpod.yml:
+
+  ----apiVersion: v1
+      kind: Pod
+      metadata: 
+       name: nginxpod
+       lables: 
+        app: myapp
+      spec:
+       containers: 
+          - name: nginxcontainer
+            image: nginx
+            ports:
+             - containerPort: 80
