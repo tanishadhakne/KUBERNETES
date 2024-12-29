@@ -1,0 +1,32 @@
+REPLICATION CONTROLLER
+
+- Create a file rc.yml.
+      --apiVersion: v1
+        kind: ReplicationController
+        metadata:
+           name: myrc
+        spec:
+          replicas: 3
+          selector:
+              env: dev
+          template:
+               metadata:
+                  labels:
+                      env: dev
+               spec:
+                    containers:
+                         - name: nginxcontaine
+                           image: nginx
+                           ports:
+                             - containerPort: 80
+- To create pod using yml file
+kubectl apply -f rc.yml
+
+-list of pods 
+kubectl get pods
+
+-list of Replication  Controllers
+kubectl get rc
+
+- To scale 
+kubectl scale rc myrc --replicas=6 
